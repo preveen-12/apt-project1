@@ -11,12 +11,14 @@ const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: { 
-        // 2. Use variables for Gmail login
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS 
-    }
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false // This helps bypass the Render security block
+  }
 });
 
 const verificationCodes = new Map();
