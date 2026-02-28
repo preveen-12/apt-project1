@@ -1,0 +1,76 @@
+/* --- CORE THEME MAPPING --- */
+:root {
+  /* These will be controlled by ThemeContext.jsx, 
+     but we set defaults here to prevent flickering */
+  --app-bg: #0a0a12;
+  --app-card: #050509;
+  --app-text: #ffffff;
+  --app-border: #1e1e30;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--app-bg) !important;
+  color: var(--app-text) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- ADAPTIVE CONTAINER OVERRIDES --- */
+/* This forces your Tailwind "slate" and "black" boxes to follow the theme */
+.bg-slate-900\/40, 
+.bg-slate-950, 
+.bg-slate-950\/80, 
+.bg-black\/40, 
+.bg-slate-950\/50 {
+  background-color: var(--app-card) !important;
+  border: 1px solid var(--app-border) !important;
+  color: var(--app-text) !important;
+  background-image: linear-gradient(var(--app-overlay), var(--app-overlay)) !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+/* --- TYPOGRAPHY VISIBILITY --- */
+h1, h2, h3, h4, p, span, label, th, td {
+  color: var(--app-text) !important;
+}
+
+/* Secondary/Dimmed text logic */
+.text-slate-500, .text-slate-400, .text-slate-300 {
+  color: var(--app-text-dim) !important;
+  opacity: 0.8;
+}
+
+/* --- INPUTS & BUTTONS --- */
+input {
+  background-color: var(--app-bg) !important;
+  border-color: var(--app-border) !important;
+  color: var(--app-text) !important;
+}
+
+input::placeholder {
+  color: var(--app-text-dim) !important;
+}
+
+/* Keep your Brand Purple consistent */
+button.bg-purple-600 {
+  background-color: var(--brand-purple) !important;
+  color: #ffffff !important; /* Always white text on purple buttons */
+}
+
+/* --- DASHBOARD TERMINAL COLORS --- */
+.text-yellow-400 { color: var(--terminal-yellow) !important; }
+.text-green-500 { color: var(--terminal-green) !important; }
+.text-red-500, .text-red-400 { color: var(--terminal-red) !important; }
+.text-blue-400 { color: #60a5fa !important; } /* Keep blue for tech logs */
+
+/* --- TABLE POLISH --- */
+thead {
+  background-color: var(--app-overlay) !important;
+}
+
+tr:hover {
+  background-color: var(--app-overlay) !important;
+}
