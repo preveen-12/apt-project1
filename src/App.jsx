@@ -47,6 +47,8 @@ const ThemeToggle = () => {
 
 function AppContent() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // 1. Lift state here so we can adjust the content margin
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -57,12 +59,25 @@ function AppContent() {
     <div style={{ 
       display: 'flex', 
       minHeight: '100vh', 
-      background: 'var(--app-bg)', // Adapts to background choice
+      background: 'var(--app-bg)', 
       transition: '0.4s ease-in-out' 
     }}>
-      <Sidebar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      {/* 2. Pass state and setter to Sidebar */}
+      <Sidebar 
+        isAuthenticated={isAuthenticated} 
+        setIsAuthenticated={setIsAuthenticated} 
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+      />
       
-      <div style={{ flex: 1, padding: '40px', marginLeft: '260px', overflowY: 'auto' }}>
+      <div style={{ 
+        flex: 1, 
+        padding: '40px', 
+        // 3. Dynamic margin based on sidebar state
+        marginLeft: isCollapsed ? '80px' : '260px', 
+        transition: 'margin-left 0.3s ease', // Smooth transition
+        overflowY: 'auto' 
+      }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '40px' }}>
           <ThemeToggle />
         </div>
